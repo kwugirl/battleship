@@ -6,30 +6,22 @@ For this coding challenge you'll build a simplified version of [battleship](http
 
 Your game interface will be a basic HTTP API. You should assume that you are implementing a spec that has already been published to clients and they will use the spec to learn how to interact with the game.
 
-We want you to flesh out the provided `BattleshipsController` so that the `create` action accepts a 2-dimensional array (represented as a string) that contains the topmost cell coordinates of ships to initialize the playing board.
-
 ### Acceptance Criteria
 
-Once you implement the `create` action you’ll then need to complete the `update` action to take x and y parameters and return the following responses under the given conditions:
+The `create` action of the `BattleshipController` should accept a 2-dimensional array (represented as a string) that contains the topmost cell coordinates of ships to initialize the playing board. It should respond with a response of the string `OK`.
+
+The `update` action should take `x` and `y` parameters and return the following responses under the given conditions:
 
 | Response | Condition |
 | --- | --- |
-| miss | When the coordinate does not land on a ship. |
-| hit | When the coordinate lands on a ship and the ship is not yet sunk. Multiple attacks on the same spot should return as hit unless the ship is already sunk. |
-| sunk | When the ship has been hit on all 3 of its cells. Subsequent attacks on a sunk ship should continue to return a sunk response. |
+| `miss` | When the coordinate does not land on a ship. |
+| `hit` | When the coordinate lands on a ship and the ship is not yet sunk. Multiple attacks on the same spot should return as hit unless the ship is already sunk. |
+| `sunk` | When the ship has been hit on all 3 of its cells. Subsequent attacks on a sunk ship should continue to return a sunk response. |
 
 All responses should be lowercase letters only. We will evaluate your submission in two stages:
 
 1. **Correctness** - When you submit your solution, we will run it through a suite of automated tests to verify the above acceptance criteria are satisfied. 
 2. **Code quality** - If your solution satisfies the correctness check, then it will be evaluated by a pair of engineers for code quality. For more details see the [What we're looking for](#what-were-looking-for) section.
-
-### Getting Started
-
-1. This problem was built and tested with Ruby version 2.3.3
-2. You should have received an email with a repo url. Clone this repo
-3. `cd` into your local directory copy
-4. `gem install bundler`
-5. `bundle install`
 
 ### Inputs and Outputs
 
@@ -38,6 +30,14 @@ All inputs and outputs are strings i.e. when running against a local server the 
 `curl --data "positions=[[0,3], [4,8], [6,6]]" http://localhost:3000/battleship`
 
 `curl -X PUT -d x=0 -d y=1 -s http://localhost:3000/battleship`
+
+### Getting Started
+
+1. This problem was built and tested with Ruby version 2.3.3
+2. You should have received an email with a repo url. Clone this repo
+3. `cd` into your local directory copy
+4. `gem install bundler`
+5. `bundle install`
 
 ### Other Notes
 
