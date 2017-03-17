@@ -1,4 +1,5 @@
 class BattleshipsController < ApplicationController
+  cattr_accessor :board
 
   skip_before_action :verify_authenticity_token
 
@@ -11,7 +12,7 @@ class BattleshipsController < ApplicationController
   def create
     positions = JSON.parse(params['positions'])
 
-    # Fill in body to initialize the game and return a 200 response
+    @@board = PlayingBoard.new(positions)
 
     render plain: "OK"
   end
