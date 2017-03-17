@@ -11,6 +11,8 @@ class PlayingBoard
       end
     end
     @grid = blank_grid
+    @height = height
+    @width = width
 
     place_ships(ship_locations)
   end
@@ -32,6 +34,8 @@ class PlayingBoard
 
   def place_ships(coordinates_list)
     coordinates_list.each do |coordinates|
+      next unless valid_coordinates?(coordinates)
+
       x, y = coordinates
 
       # ships are 1 cell wide, 3 cells long, vertically oriented
@@ -39,5 +43,21 @@ class PlayingBoard
       @grid[[x,y-1]] = ShipSegment.new(coordinates)
       @grid[[x,y-2]] = ShipSegment.new(coordinates)
     end
+  end
+
+  def valid_coordinates?(coordinates)
+    within_grid?(coordinates) && no_overlap?(coordinates)
+  end
+
+  #TODO: make this not rely on implicitly knowing ships are 1x3 & vertical
+  def within_grid?(coordinates)
+    x, y = coordinates
+    (0...@width).include?(x) && (2...@height).include?(y)
+  end
+
+  #TODO: make this not rely on implicitly knowing ships are 1x3 & vertical
+  def no_overlap?(ship_front)
+    x, y = ship_front
+    !(@grid[[x,y]].is_ship? || @grid[[x,y-1]].is_ship? || @grid[[x,y-2]].is_ship?)
   end
 end
