@@ -30,6 +30,10 @@ class PlayingBoard
     locations
   end
 
+  def register_shot(x, y)
+    return :miss unless @grid[[x,y]].is_ship?
+  end
+
   private
 
   def place_ships(coordinates_list)

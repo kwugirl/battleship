@@ -21,4 +21,11 @@ class PlayingBoardTest < Minitest::Test
 
   def test_initialize_board_with_fewer_than_3_ships
   end
+
+
+  def test_register_shot_empty_space
+    board = PlayingBoard.new
+
+    assert_equal :miss, board.register_shot(0, 2)
+  end
 end
