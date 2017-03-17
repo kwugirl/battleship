@@ -21,8 +21,8 @@ class BattleshipsController < ApplicationController
     x = params['x'].to_i
     y = params['y'].to_i
 
-    # Fill in body to take x and y coordinates and return result as "miss", "hit" or "sunk"
-    result = nil
+    result = @@board.register_shot(x,y).to_s
+
     render plain: result
   end
 end

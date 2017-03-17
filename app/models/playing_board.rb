@@ -32,6 +32,11 @@ class PlayingBoard
 
   def register_shot(x, y)
     return :miss unless @grid[[x,y]].is_ship?
+
+    ship_segment = @grid[[x,y]]
+    process_hit(x,y) if ship_segment.status == :live
+
+    ship_segment.status
   end
 
   private
@@ -63,5 +68,9 @@ class PlayingBoard
   def no_overlap?(ship_front)
     x, y = ship_front
     !(@grid[[x,y]].is_ship? || @grid[[x,y-1]].is_ship? || @grid[[x,y-2]].is_ship?)
+  end
+
+  def process_hit(x,y)
+    @grid[[x,y]].status = :hit
   end
 end

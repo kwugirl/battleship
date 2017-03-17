@@ -28,4 +28,17 @@ class PlayingBoardTest < Minitest::Test
 
     assert_equal :miss, board.register_shot(0, 2)
   end
+
+  def test_register_shot_new_hit
+    board = PlayingBoard.new([[0,2]])
+
+    assert_equal :hit, board.register_shot(0, 2)
+  end
+
+  def test_register_shot_existing_hit
+    board = PlayingBoard.new([[0,2]])
+    board.register_shot(0, 2)
+
+    assert_equal :hit, board.register_shot(0, 2)
+  end
 end
