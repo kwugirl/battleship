@@ -41,4 +41,15 @@ class PlayingBoardTest < Minitest::Test
 
     assert_equal :hit, board.register_shot(0, 2)
   end
+
+  def test_register_shot_sunk_ship
+    board = PlayingBoard.new([[0,2]])
+    board.register_shot(0, 2)
+    board.register_shot(0, 1)
+
+    assert_equal :sunk, board.register_shot(0, 0)
+    assert_equal :sunk, board.register_shot(0, 2)
+    assert_equal :sunk, board.register_shot(0, 1)
+    assert_equal :sunk, board.register_shot(0, 0)
+  end
 end

@@ -72,5 +72,22 @@ class PlayingBoard
 
   def process_hit(x,y)
     @grid[[x,y]].status = :hit
+
+    ship_front = @grid[[x,y]].ship_front
+    mark_ship_sunk(ship_front) if ship_sunk?(ship_front)
+  end
+
+  #TODO: make this not rely on implicitly knowing ships are 1x3 & vertical
+  def ship_sunk?(ship_front)
+    x, y = ship_front
+    @grid[[x,y]].status == :hit && @grid[[x,y-1]].status == :hit && @grid[[x,y-2]].status == :hit
+  end
+
+  #TODO: make this not rely on implicitly knowing ships are 1x3 & vertical
+  def mark_ship_sunk(ship_front)
+    x, y = ship_front
+    @grid[[x,y]].status = :sunk
+    @grid[[x,y-1]].status = :sunk
+    @grid[[x,y-2]].status = :sunk
   end
 end
