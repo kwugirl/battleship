@@ -1,5 +1,6 @@
 class BattleshipsController < ApplicationController
   cattr_accessor :board
+  @@board = PlayingBoard.new
 
   skip_before_action :verify_authenticity_token
 
@@ -21,7 +22,7 @@ class BattleshipsController < ApplicationController
     x = params['x'].to_i
     y = params['y'].to_i
 
-    result = @@board.register_shot(x,y).to_s
+    result = @@board.register_shot(x,y)
 
     render plain: result
   end
